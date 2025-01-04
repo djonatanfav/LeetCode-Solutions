@@ -5,18 +5,20 @@ using namespace std;
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-        int size = prices.size();
-        int maiorDiferenca = 0;
+        int maiorLucro = 0;
+        int menorValor = INT_MAX;
 
-        for(int i = 0; i < (size - 1); i++){
-            for(int j = i + 1; j < size; j++){
-                if(prices[j] - prices[i] > maiorDiferenca){
-                    maiorDiferenca = prices[j] - prices[i];
-                }
+        for (int price : prices) {
+            if (price < menorValor) {
+                menorValor = price;
+            }
+            int profit = price - menorValor;
+            if (profit > maiorLucro) {
+                maiorLucro = profit;
             }
         }
 
-        return maiorDiferenca;
+        return maiorLucro;
     }
 };
 
