@@ -8,17 +8,16 @@ class Solution
 {
 public:
     bool containsDuplicate(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
+        unordered_set<int> lista;
 
-        int p = INT_MIN;
-
-        for(int n : nums){
-            if(n == p){
+        for (int num : nums) {
+            if (lista.find(num) != lista.end()) {
                 return true;
             }
-            p = n;
+            lista.insert(num);
         }
         return false;
+
     }
 };
 
