@@ -6,16 +6,15 @@ class Solution
 public:
     bool canConstruct(string ransomNote, string magazine)
     {
-        int i;
-        for (char c : ransomNote)
-        {
-            i = magazine.find(c);
-            if (i != std::string::npos)
-            {
-                magazine.erase(i, 1);
-            }
-            else
-            {
+        unordered_map<char, int> map;
+        for (char ch : magazine) {
+            hashmap[ch]++;
+        }
+
+        for (char ch : ransomNote) {
+            if (map[ch] > 0) {
+                map[ch]--;
+            } else {
                 return false;
             }
         }
