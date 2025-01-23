@@ -1,10 +1,7 @@
 class Solution:
     def maximumLengthSubstring(self, s: str) -> int:
-        r = 0
-        l = 0
+        r, l, c, m = 0, 0, 0, 0
         h = {}
-        c = 0
-        m = 0
         
         while r <= len(s) - 1:    
             if (s[r]) not in h:
@@ -18,7 +15,7 @@ class Solution:
                 h[s[l]] -= 1
                 r += 1
                 l += 1
-                
+            
             m = max(m, c)
             
         return m
