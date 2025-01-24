@@ -1,5 +1,5 @@
+# Using Slide Window
 from typing import List
-
 
 class Solution:
     def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
@@ -8,33 +8,22 @@ class Solution:
         dictionary = {}
         
         while right_pointer <= min(len(nums) -1, k):
-            if nums[right_pointer] not in dictionary:
-                dictionary[nums[right_pointer]] = 0
-            dictionary[nums[right_pointer]] += 1
+            if nums[right_pointer] in dictionary:
+                return True
+            else:
+                dictionary[nums[right_pointer]] = 1
             right_pointer += 1
-           
-        if self.checkCurrent(dictionary):
-            return True
         
         while right_pointer <= len(nums) - 1:
-            if nums[right_pointer] not in dictionary:
-                dictionary[nums[right_pointer]] = 0
-            dictionary[nums[right_pointer]] += 1
-            if dictionary[nums[left_pointer]] == 1:
-                del dictionary[nums[left_pointer]]
-            else:
-                dictionary[nums[left_pointer]] -= 1
-            if self.checkCurrent(dictionary):
+            del dictionary[nums[left_pointer]]
+            if nums[right_pointer] in dictionary:
                 return True
+            else:
+                dictionary[nums[right_pointer]] = 1
             right_pointer += 1
             left_pointer += 1
         return False
     
-    def checkCurrent(self, dictionary):
-        for v in dictionary.values():
-            if v > 1:
-                return True
-            
         
 solution = Solution()
-print(solution.containsNearbyDuplicate([1], 1))
+print(solution.containsNearbyDuplicate([1,2,3,1,2,3], 2))
