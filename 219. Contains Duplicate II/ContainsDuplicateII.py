@@ -7,7 +7,7 @@ class Solution:
         left_pointer = 0
         dictionary = {}
         
-        while right_pointer <= min(len(nums), k):
+        while right_pointer <= min(len(nums) -1, k):
             if nums[right_pointer] not in dictionary:
                 dictionary[nums[right_pointer]] = 0
             dictionary[nums[right_pointer]] += 1
@@ -20,12 +20,14 @@ class Solution:
             if nums[right_pointer] not in dictionary:
                 dictionary[nums[right_pointer]] = 0
             dictionary[nums[right_pointer]] += 1
-            dictionary[nums[left_pointer]] -= 1
+            if dictionary[nums[left_pointer]] == 1:
+                del dictionary[nums[left_pointer]]
+            else:
+                dictionary[nums[left_pointer]] -= 1
             if self.checkCurrent(dictionary):
                 return True
             right_pointer += 1
             left_pointer += 1
-        
         return False
     
     def checkCurrent(self, dictionary):
@@ -33,7 +35,6 @@ class Solution:
             if v > 1:
                 return True
             
-            
         
 solution = Solution()
-print(solution.containsNearbyDuplicate([1,2,3,1,2,3], 2))
+print(solution.containsNearbyDuplicate([1], 1))
